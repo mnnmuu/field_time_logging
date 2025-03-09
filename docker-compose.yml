@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    image: node:lts-alpine
+    container_name: field_time_logging
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /app
+          ignore:
+            - node_modules
+    command: sh -c "npm install && npm run dev"
